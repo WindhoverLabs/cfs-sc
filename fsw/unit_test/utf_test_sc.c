@@ -2,7 +2,7 @@
 ** File:
 **   $Id: utf_test_sc.c 1.9 2015/03/02 12:59:09EST sstrege Exp  $
 **
-**  Copyright © 2007-2014 United States Government as represented by the 
+**  Copyright ï¿½ 2007-2014 United States Government as represented by the 
 **  Administrator of the National Aeronautics and Space Administration. 
 **  All Other Rights Reserved.  
 **
@@ -77,10 +77,7 @@
 #include <stdlib.h>
 
 void SC_AppMain (void);
-int32 SC_AppInit(void);
-int32 SC_RegisterTablesNoCDS(void);
-int32 SC_RegisterDumpOnlyTables(void);
-int32 SC_GetTableAddresses(void);
+int32 SC_AppInit(void);;
 
 int32 CFE_TBL_NotifyByMessage(CFE_TBL_Handle_t TblHandle, uint32 MsgId, uint16 CommandCode, uint32 Parameter) { return(0); }
 
@@ -404,7 +401,7 @@ int main(void)
 
     /* Test error conditions of SC_GetTableAddresses */
     UTF_CFE_TBL_Set_Api_Return_Code(CFE_TBL_GETADDRESS_PROC, -1);
-    SC_GetTableAddresses();
+    //SC_GetTableAddresses();
     UTF_CFE_TBL_Set_Api_Return_Code(CFE_TBL_GETADDRESS_PROC, UTF_CFE_USE_DEFAULT_RETURN_CODE);
     
     
@@ -463,11 +460,11 @@ int main(void)
      SC_AppInit();
      UTF_CFE_TBL_Set_Api_Return_Code(CFE_TBL_GETADDRESS_PROC, UTF_CFE_USE_DEFAULT_RETURN_CODE);
     
-    #if (SC_SAVE_TO_CDS == FALSE)
-     UTF_CFE_TBL_Set_Api_Return_Code(CFE_TBL_REGISTER_PROC, -1);    
-     SC_RegisterTablesNoCDS();
-     UTF_CFE_TBL_Set_Api_Return_Code(CFE_TBL_REGISTER_PROC, UTF_CFE_USE_DEFAULT_RETURN_CODE);
-    #endif
+    //#if (SC_SAVE_TO_CDS == FALSE)
+    // UTF_CFE_TBL_Set_Api_Return_Code(CFE_TBL_REGISTER_PROC, -1);
+    // SC_RegisterTablesNoCDS();
+    // UTF_CFE_TBL_Set_Api_Return_Code(CFE_TBL_REGISTER_PROC, UTF_CFE_USE_DEFAULT_RETURN_CODE);
+    //#endif
       UTF_SB_set_function_hook(CFE_SB_SUBSCRIBE_HOOK,
                              (void *)&CFE_SB_SubscribeHook);
      SC_AppInit();
@@ -476,16 +473,16 @@ int main(void)
      
      UTF_TBL_set_function_hook(CFE_TBL_REGISTER_HOOK,
                               (void *)&CFE_TBL_RegisterHookDumpOnlyTables);
-     SC_RegisterDumpOnlyTables();
-     SC_RegisterDumpOnlyTables();
-     SC_RegisterDumpOnlyTables();
-     SC_RegisterDumpOnlyTables();
+     //SC_RegisterDumpOnlyTables();
+     //SC_RegisterDumpOnlyTables();
+     //SC_RegisterDumpOnlyTables();
+     //SC_RegisterDumpOnlyTables();
      
-    #if (SC_SAVE_TO_CDS == FALSE)
-     UTF_TBL_set_function_hook(CFE_TBL_REGISTER_HOOK,
-                              (void *)&CFE_TBL_RegisterHookRegisterNoCDS);
-     SC_RegisterTablesNoCDS();
-    #endif
+    //#if (SC_SAVE_TO_CDS == FALSE)
+    // UTF_TBL_set_function_hook(CFE_TBL_REGISTER_HOOK,
+    //                          (void *)&CFE_TBL_RegisterHookRegisterNoCDS);
+    // SC_RegisterTablesNoCDS();
+    //#endif
      return 0;
          
 }/* end main*/

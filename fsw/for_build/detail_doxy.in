@@ -1,15 +1,15 @@
 # Doxyfile 1.5.4
 @INCLUDE_PATH=../docs/dox_src/mnem_maps \
-              $(CFS_APP_SRC)/$(APPTARGET)/docs/dox_src/mnem_maps
-@INCLUDE=cfs_$(APPTARGET)_cmd_mnem_map
-@INCLUDE=cfs_$(APPTARGET)_tlm_mnem_map
+              $(CFS_APP_SRC)/@APPTARGET@/docs/dox_src/mnem_maps
+@INCLUDE=cfs_@APPTARGET@_cmd_mnem_map
+@INCLUDE=cfs_@APPTARGET@_tlm_mnem_map
 #---------------------------------------------------------------------------
 # Project related configuration options
 #---------------------------------------------------------------------------
 #DOXYFILE_ENCODING      = UTF-8
-PROJECT_NAME           = "Code Walkthrough of CFS Stored Command Application"
-PROJECT_NUMBER         = "$(CURR_DATE)"
-OUTPUT_DIRECTORY       = $(CFS_APP_SRC)/$(APPTARGET)/docs/cwt/html
+PROJECT_NAME           = "CFS Stored Command (SC) Application on $(CPUNAME) Detailed Design"
+PROJECT_NUMBER         = 
+OUTPUT_DIRECTORY       = docs/detailed_design/html/@APPTARGET@
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
@@ -27,7 +27,7 @@ MULTILINE_CPP_IS_BRIEF = NO
 DETAILS_AT_TOP         = NO
 INHERIT_DOCS           = YES
 SEPARATE_MEMBER_PAGES  = NO
-TAB_SIZE               = 8
+TAB_SIZE               = 4
 ALIASES               += "event=\xrefitem cfeevents \"Event Message\" \"cFE Event Message Cross Reference\" "
 ALIASES               += "retdesc=<TD WIDTH=\"80%\"> "
 ALIASES               += "retcode=<TR><TD WIDTH=\"20%\" VALIGN=TOP> "
@@ -70,7 +70,7 @@ INLINE_INFO            = YES
 SORT_MEMBER_DOCS       = YES
 SORT_BRIEF_DOCS        = NO
 SORT_BY_SCOPE_NAME     = NO
-GENERATE_TODOLIST      = YES
+GENERATE_TODOLIST      = NO
 GENERATE_TESTLIST      = YES
 GENERATE_BUGLIST       = YES
 GENERATE_DEPRECATEDLIST= YES
@@ -92,11 +92,13 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = $(CFS_APP_SRC)/$(APPTARGET)/docs/dox_src/detailed_design/cfs_$(APPTARGET).dox
-#INPUT                 += $(CFS_APP_SRC)/$(APPTARGET)/fsw/public_inc 
-INPUT                 += $(CFS_APP_SRC)/$(APPTARGET)/fsw/src 
-INPUT                 += $(CFS_APP_SRC)/$(APPTARGET)/fsw/mission_inc 
-INPUT                 += $(CFS_APP_SRC)/$(APPTARGET)/fsw/platform_inc 
+INPUT                  = $(CFS_APP_SRC)/@APPTARGET@/docs/dox_src/detailed_design/cfs_@APPTARGET@.dox
+#INPUT                 += $(CFS_APP_SRC)/@APPTARGET@/fsw/public_inc 
+INPUT                 += ../../mission_inc/@APPTARGET@_perfids.h 
+#INPUT                 += ../../mission_inc/@APPTARGET@_mission_cfg.h
+INPUT                 += ../inc/@APPTARGET@_msgids.h 
+INPUT                 += ../inc/@APPTARGET@_platform_cfg.h
+INPUT                 += $(CFS_APP_SRC)/@APPTARGET@/fsw/src 
 #INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
                          *.h
@@ -109,7 +111,7 @@ EXAMPLE_PATH           =
 EXAMPLE_PATTERNS       = *
 EXAMPLE_RECURSIVE      = NO
 IMAGE_PATH             = "./"
-IMAGE_PATH            += "$(CFS_APP_SRC)/$(APPTARGET)/docs/dox_src/detailed_design/"
+IMAGE_PATH            += "$(CFS_APP_SRC)/@APPTARGET@/docs/dox_src/detailed_design/"
 INPUT_FILTER           = 
 FILTER_PATTERNS        = 
 FILTER_SOURCE_FILES    = NO
@@ -155,7 +157,7 @@ TREEVIEW_WIDTH         = 250
 # configuration options related to the LaTeX output
 #---------------------------------------------------------------------------
 GENERATE_LATEX         = NO
-LATEX_OUTPUT           = ../../latex
+LATEX_OUTPUT           = ../../../latex/$(CPUNAME)/@APPTARGET@
 LATEX_CMD_NAME         = latex
 MAKEINDEX_CMD_NAME     = makeindex
 COMPACT_LATEX          = YES
@@ -170,7 +172,7 @@ LATEX_HIDE_INDICES     = NO
 # configuration options related to the RTF output
 #---------------------------------------------------------------------------
 GENERATE_RTF           = NO
-RTF_OUTPUT             = ../../rtf
+RTF_OUTPUT             = ../../../rtf/$(CPUNAME)/@APPTARGET@
 COMPACT_RTF            = YES
 RTF_HYPERLINKS         = NO
 RTF_STYLESHEET_FILE    = 
@@ -214,15 +216,14 @@ PREDEFINED             = __PPC__ \
                          MESSAGE_FORMAT_IS_CCSDS \
                          CFE_TIME_CFG_SRC_TIME \
                          CFE_TIME_CFG_SRC_GPS \
-                         CFE_TIME_CFG_SRC_MET \
-                         SC_SAVE_TO_CDS
+                         CFE_TIME_CFG_SRC_MET
 EXPAND_AS_DEFINED      = 
 SKIP_FUNCTION_MACROS   = YES
 #---------------------------------------------------------------------------
 # Configuration::additions related to external references   
 #---------------------------------------------------------------------------
 TAGFILES               = ../cfe/cfe.tag=../cfe
-GENERATE_TAGFILE       = $(APPTARGET).tag
+GENERATE_TAGFILE       = @APPTARGET@.tag
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = YES
 PERL_PATH              = /usr/bin/perl
@@ -241,7 +242,7 @@ TEMPLATE_RELATIONS     = NO
 INCLUDE_GRAPH          = YES
 INCLUDED_BY_GRAPH      = YES
 CALL_GRAPH             = YES
-CALLER_GRAPH           = NO
+CALLER_GRAPH           = YES
 GRAPHICAL_HIERARCHY    = NO
 DIRECTORY_GRAPH        = YES
 DOT_IMAGE_FORMAT       = png
