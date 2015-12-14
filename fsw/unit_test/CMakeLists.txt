@@ -5,6 +5,10 @@ set( MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --leak-check=full" )
 
 # Set include directories
 include_directories(
+	../mission_inc
+	../platform_inc
+	$ENV{CFE_DIR}/fsw/mission_inc
+	$ENV{CFE_DIR}/fsw/platform_inc/cpu1
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CFE_INC_DIRS}
 	${OSAL_INC_DIRS}
@@ -33,3 +37,7 @@ add_test(NAME sc-ut
 
 # Copy input files to build directory
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/utf_test_cmds_sc.in ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+    
+# Build tables for the tests
+add_subdirectory(cf/apps/ cf/apps)
+add_subdirectory(cf/apps/ATS cf/apps/ATS)
