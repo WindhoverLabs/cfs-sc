@@ -27,8 +27,8 @@ target_link_libraries(SC-UT -fprofile-arcs gcov ${CMAKE_THREAD_LIBS_INIT})
 add_test(NAME sc-ut
     COMMAND ${CMAKE_COMMAND}
     	-DTEST_PROG=$<TARGET_FILE:SC-UT>
-    	-DEXPECTED_OUTPUT=${CMAKE_CURRENT_SOURCE_DIR}/sc_utf_test.out
-    	-DACTUAL_OUTPUT=${CMAKE_CURRENT_BINARY_DIR}/sc_utf_test.out
+    	-DEXPECTED_OUTPUT=${CMAKE_CURRENT_SOURCE_DIR}/utf_test_sc.out
+    	-DACTUAL_OUTPUT=${CMAKE_CURRENT_BINARY_DIR}/utf_test_sc.out
     -P ${CMAKE_CURRENT_SOURCE_DIR}/runtest.cmake)
 
 # Copy input files to build directory
