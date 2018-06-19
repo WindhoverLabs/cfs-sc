@@ -20,12 +20,12 @@ include_directories(${OSAL_INC_DIRS})
 include_directories(${PSP_INC_DIRS})
 	
 # Build application
-add_library(${APP_FILE} SHARED ${APP_SRC} ${APP_CUSTOM_SRC})
+add_app(${APP_FILE} SHARED ${APP_SRC} ${APP_CUSTOM_SRC})
 
 # Build tables
-add_library(sc_ats1 STATIC ${TABLE_DIR}/sc_ats1.c)
-add_library(sc_rts001 STATIC ${TABLE_DIR}/sc_rts001.c)
-add_library(sc_rts002 STATIC ${TABLE_DIR}/sc_rts002.c)
+add_app(sc_ats1 STATIC ${TABLE_DIR}/sc_ats1.c)
+add_app(sc_rts001 STATIC ${TABLE_DIR}/sc_rts001.c)
+add_app(sc_rts002 STATIC ${TABLE_DIR}/sc_rts002.c)
 set_target_properties(sc_ats1 PROPERTIES PREFIX "" SUFFIX ".tbl")
 set_target_properties(sc_rts001 PROPERTIES PREFIX "" SUFFIX ".tbl")
 set_target_properties(sc_rts002 PROPERTIES PREFIX "" SUFFIX ".tbl")
